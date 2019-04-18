@@ -1,0 +1,61 @@
+<div>
+  <form class="mat-elevation-z8" [formGroup]="editProductForm" (ngSubmit)="onSubmit()"
+  style="margin:auto;width: 50%;">
+    <label>
+      <span class="required">Name:</span>
+      <input type="text" formControlName="name" required>
+    </label>
+    
+    <label>
+      <span class="required">Weight:</span>
+      <input type="text" formControlName="weight" required>
+    </label>
+
+    <label>
+      Availability:
+      <input type="number" formControlName="availability">
+    </label>
+
+    <label>
+      <span class="required">Product URL</span>
+      <input type="text" formControlName="productURL" required>
+    </label>
+    
+    <label>
+      <span class="required">Price Tier:</span> <br>
+      <mat-radio-group aria-label="Select Price Tier" formControlName = "priceTier">
+        <mat-radio-button value="budget">Budget</mat-radio-button> <br>
+        <mat-radio-button value="premier">Premier</mat-radio-button>
+      </mat-radio-group>
+    </label>
+
+    <label>
+      <span class="required">Price Range:</span>
+      <mat-form-field *ngIf="priceTire.value === 'budget'">
+        <mat-label>Select Price Range</mat-label>
+        <mat-select formControlName = "priceRange">
+          <mat-option *ngFor="let price of budgetPrices" value="{{price}}">
+            {{price}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="priceTire.value === 'premier'">
+        <mat-label>Select Price Range</mat-label>
+        <mat-select formControlName = "priceRange">
+          <mat-option *ngFor="let price of premierPrices" value="{{price}}">
+            {{price}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </label>
+    <label>
+      <span class="required">Can Be Edited?</span> <br>
+      <mat-checkbox (change)="onCheckChange($event)" value="true">Yes</mat-checkbox>
+      <mat-checkbox (change)="onCheckChange($event)" value="false">No</mat-checkbox>
+    </label>
+    <label>
+      <button mat-raised-button color = "warn" type="submit" [disabled]="!editProductForm.valid">Submit</button>
+    </label>
+  </form>
+</div>

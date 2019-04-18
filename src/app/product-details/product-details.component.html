@@ -1,0 +1,33 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef> Weight </th>
+    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  </ng-container>
+
+  <!-- Availability Column -->
+  <ng-container matColumnDef="availability">
+    <th mat-header-cell *matHeaderCellDef> Availability </th>
+    <td mat-cell *matCellDef="let element"> {{element.availability}} </td>
+  </ng-container>
+
+  <!-- Editable Column -->
+  <ng-container matColumnDef="isEditable">
+    <th mat-header-cell *matHeaderCellDef> isEditable </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color = "warn" (click) = "goToNextPage(element)" *ngIf = "element.isEditable !== 'false'">Edit</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
