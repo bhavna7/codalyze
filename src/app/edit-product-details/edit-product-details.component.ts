@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, AbstractControl,  Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as productConfig from '../../../products.json';
 
 @Component({
   selector: 'app-edit-product-details',
@@ -11,8 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditProductDetailsComponent implements OnInit {
   public retrivedProductObject: any;
   public editProductForm;
-  public budgetPrices = [ '4k - 6k',  '6k - 9k',  '9k - 11k' ];
-  public premierPrices = [ '11k - 20k',  '20k - 30k',  '30k+' ];
+  public budgetPrices = productConfig.default.pricingInfo.budget;
+  public premierPrices = productConfig.default.pricingInfo.premier;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { 
     this.route.queryParams.subscribe((params: any) => {
